@@ -2,20 +2,23 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import preprocess
-import seaborn as sns
+import data_exploration as DE
 
 def main():
     st.title("DSAI Modelling Platform")
     st.sidebar.image('res/images/dsai_v2.png',width=270)
     st.sidebar.title("Build your Model")
     st.markdown("Build a Classification or Regression Model")
+
     st.header("1. Import Dataset")
     data_frame = load_data()
+
     st.header("2. Exploratory Analysis")
-    df_stats = show_basic_eda(data_frame)
+    df_stats = DE.Exploration.show_basic_eda(data_frame)
+
     st.header("3. Pre Process")
     st.header("4. Feature Selection")
-    feature_selection_plots = feature_plots(data_frame)
+    feature_selection_plots = DE.PlotCharts.feature_plots(data_frame)
 
 #Load dataset
 def load_data():
@@ -36,21 +39,5 @@ def load_data():
 
     return df
 
-#Shows basic exploratory data analysis
-def show_basic_eda(data):
-    if st.checkbox("Show basic exploration", False):
-        st.subheader("Statistics of each column")
-        st.dataframe(data.describe())
-        st.subheader("Number of missing values")
-        st.dataframe(data.isnull().sum())
-        st.subheader("Data type of each column")
-        st.dataframe(data.dtypes)
-
-def feature_plots(data):
-    st.subheader("Correlation Matrix")
-    corrMatrix = data.corr()
-    sns.heatmap(corrMatrix, annot=True)
-    st.pyplot()
-    
 if __name__ == '__main__':
     main()
