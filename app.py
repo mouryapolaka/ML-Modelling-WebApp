@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import preprocess as PP
 import data_exploration as DE
+import train_model as TRM
 
 def main():
     st.title("DSAI Modelling Platform")
@@ -28,10 +29,17 @@ def main():
         clean_btn = PP.PreProcess.clean_data(temp_df,clean_missing_values,feature_encoding)
         st.subheader("Pre Processed Data Frame")
         st.dataframe(clean_btn)
-    
+
     #Feature selection section
     st.header("4. Feature Selection")
     feature_selection_plots = DE.PlotCharts.feature_plots(data_frame)
+
+    #Training model
+    st.header("5. Split Data")
+    split_data = TRM.Train.split_data()
+
+    st.header("6. Modelling")
+    classify = TRM.Train.select_algorithm()
 
 #Load dataset
 def load_data():
