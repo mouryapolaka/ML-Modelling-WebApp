@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import preprocess
+import preprocess as PP
 import data_exploration as DE
 
 def main():
@@ -17,6 +17,9 @@ def main():
     df_stats = DE.Exploration.show_basic_eda(data_frame)
 
     st.header("3. Pre Process")
+    replace_missing_values = PP.MissingValues.replace_missing_values(data_frame)
+    feature_encoding = PP.LabelEncode.feature_encode(data_frame)
+
     st.header("4. Feature Selection")
     feature_selection_plots = DE.PlotCharts.feature_plots(data_frame)
 
