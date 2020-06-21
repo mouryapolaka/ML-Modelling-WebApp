@@ -9,7 +9,7 @@ def main():
     st.title("DSAI Modelling Platform")
     st.markdown("Build a Classification or Regression Model")
     st.sidebar.image('res/images/dsai_v2.png',width=300)
-    st.sidebar.markdown("Build a classification or regression model using DSAI platform.")
+    st.sidebar.markdown("Build a classification or regression model using DSAI data mining platform.")
 
     #Import dataset
     st.header("1. Import Dataset")
@@ -22,14 +22,13 @@ def main():
 
     #Data cleaning section
     st.header("3. Pre Process")
-    clean_missing_values = PP.PreProcess.replace_missing_values(data_frame)
-    feature_encoding = PP.PreProcess.feature_encode(data_frame)
+    clean_missing_values = PP.PreProcess.replace_missing_values(temp_df)
+    feature_encoding = PP.PreProcess.feature_encode(temp_df)
 
     if st.button("Clean Data", key = 'clean_data'):
         clean_btn = PP.PreProcess.clean_data(temp_df,clean_missing_values,feature_encoding)
         st.subheader("Pre Processed Data Frame")
         st.dataframe(clean_btn)
-        temp_df = clean_btn
 
     #Feature selection section
     st.header("4. Feature Selection")
@@ -42,7 +41,7 @@ def main():
     split_data = TRM.Train.split_data(features)
 
     st.header("6. Modelling")
-    classify = TRM.Train.select_algorithm(split_data)
+    classify = TRM.Train.train_data(split_data)
 
 #Load dataset
 def load_data():
