@@ -2,8 +2,6 @@ import streamlit as st
 import pandas as pd
 from sklearn import preprocessing
 import os.path
-import csv
-import pathlib
 import io
 
 class PreProcess:

@@ -4,7 +4,6 @@ import numpy as np
 import preprocess as PP
 import data_exploration as DE
 import train_model as TRM
-import os
 
 def main():
     st.title("DSAI Modelling Platform")

@@ -56,7 +56,13 @@ class Train:
                     accuracy = model.score(X_test,y_test)
                     y_pred = model.predict(X_test)
                     st.write("Accuracy: ", accuracy.round(2))
-                    st.write("Precision: ", precision_score(y_test, y_pred, labels=target_names).round(2))
+                    
+                    if len(target_names) > 2:
+                        st.write("Precision: ", precision_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                    else:
+                        st.write("Precision: ", precision_score(y_test,y_pred, labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, labels=target_names).round(2))
 
 
         elif mining_problems_menu == 'Regression':
