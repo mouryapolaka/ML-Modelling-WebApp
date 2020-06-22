@@ -4,6 +4,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import precision_score, recall_score
 
 class Train:
+    
     def feature_selection(data):
 
         feature_cols = st.multiselect("Select features", (data.columns))

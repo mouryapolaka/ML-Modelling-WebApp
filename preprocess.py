@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
 from sklearn import preprocessing
+import os.path
+import csv
+import pathlib
+import io
 
 class PreProcess:
-
     def replace_missing_values(data):
 
         replace_options = ["-","Mean","Median","Mode"]
@@ -41,5 +44,13 @@ class PreProcess:
 
         for cols in encode_col_selection:
             data_frame['{}_encoded'.format(cols)] = le.fit_transform(data_frame[cols])
+
+        cleaned_data_path = 'res/cleaned_data.csv'
+
+        if os.path.exists(cleaned_data_path):
+            os.remove(cleaned_data_path)
+            io.StringIO(df.to_csv(cleaned_data_path,index=False))
+        elif os.path.exists(cleaned_data_path) == False:
+            io.StringIO(df.to_csv('res/cleaned_data.csv',index=False))
 
         return data_frame
