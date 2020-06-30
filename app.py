@@ -10,8 +10,7 @@ def main():
     st.markdown("Build a Classification or Regression Model")
     st.sidebar.image('res/images/dsai_v2.png',width=300)
     st.sidebar.markdown("Build a classification or regression model using DSAI data mining platform.")
-    print("Test")
-    
+
     #Load dataset
     def load_data():
         #Prompt user to upload file
