@@ -2,6 +2,8 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import precision_score, recall_score
+from sklearn.metrics import classification_report
+import pandas as pd
 
 class Train:
     
@@ -63,8 +65,15 @@ class Train:
                     else:
                         st.write("Precision: ", precision_score(y_test,y_pred, labels=target_names).round(2))
                         st.write("Recall: ", recall_score(y_test,y_pred, labels=target_names).round(2))
+                    
+                    '''
+                    class_report = classification_report(y_pred,y_test,output_dict=True)
+                    class_report_df = pd.DataFrame(class_report)
 
-
+                    if st.checkbox("Show classification report", False):
+                        st.dataframe(class_report_df)
+                    '''
+                    
         elif mining_problems_menu == 'Regression':
             regressors = ["-","Decision Tree","Support Vector Machine (SVM)","Logistic Regression","Random Forest"]
             regressor_menu = st.selectbox("Select a regression algorithm", (regressors))
