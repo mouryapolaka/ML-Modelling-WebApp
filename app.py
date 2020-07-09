@@ -38,6 +38,8 @@ def main():
     #Exploratory analysis section
     st.header("2. Exploratory Analysis")
     df_stats = DE.Exploration.show_basic_eda(data_frame)
+    cleaned_df = DE.Exploration.show_basic_eda(data_frame)
+    
 
     #Data cleaning section
     st.header("3. Pre Process")
