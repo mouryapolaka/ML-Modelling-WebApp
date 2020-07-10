@@ -1,6 +1,7 @@
 import streamlit as st
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC
 from sklearn.metrics import precision_score, recall_score
 from sklearn.metrics import classification_report
 import pandas as pd
@@ -54,6 +55,35 @@ class Train:
                 if st.button("classify", key='classify'):
                     st.subheader("Decision tree results")
                     model = DecisionTreeClassifier(max_depth=max_depth, min_samples_split=min_samples_split)
+                    model.fit(X_train,y_train)
+                    accuracy = model.score(X_test,y_test)
+                    y_pred = model.predict(X_test)
+                    st.write("Accuracy: ", accuracy.round(2))
+                    
+                    if len(target_names) > 2:
+                        st.write("Precision: ", precision_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                    else:
+                        st.write("Precision: ", precision_score(y_test,y_pred, labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, labels=target_names).round(2))
+                    
+                    '''
+                    class_report = classification_report(y_pred,y_test,output_dict=True)
+                    class_report_df = pd.DataFrame(class_report)
+
+                    if st.checkbox("Show classification report", False):
+                        st.dataframe(class_report_df)
+                    '''
+            
+            #Classification for SVM
+            if classifier_menu == 'Support Vector Machine (SVM)':
+                st.subheader("SVM Parameters")
+                c_value = st.slider("C value",1,100, key="c_value")
+                kernel_value = st.selectbox("Select kernel value", ['linear','poly','rbf','sigmoid','precomputed'])
+
+                if st.button("classify", key='classify'):
+                    st.subheader("SVM results")
+                    model = SVC(C=c_value, kernel=kernel_value)
                     model.fit(X_train,y_train)
                     accuracy = model.score(X_test,y_test)
                     y_pred = model.predict(X_test)
