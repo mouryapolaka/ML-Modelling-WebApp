@@ -1,10 +1,16 @@
 import streamlit as st
 from sklearn.model_selection import train_test_split
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.svm import SVC
 from sklearn.metrics import precision_score, recall_score
 from sklearn.metrics import classification_report
 import pandas as pd
+
+#import classifiers from sklearn
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+
+#import regressors from sklearn
+
 
 class Train:
     
@@ -103,7 +109,38 @@ class Train:
                     if st.checkbox("Show classification report", False):
                         st.dataframe(class_report_df)
                     '''
+
+            #Classification for logistic regression
+            if classifier_menu == 'Logistic Regression':
+                st.subheader("Logistic Regression Parameters")
+                c_value = st.slider("C value",1,100, key="c_value")
+                solver_value = st.selectbox("Select solver", ['newton-cg','lbfgs','liblinear','sag','saga'])
+                max_iter_value = st.slider("Maximum Iterations",1,500, key="max_iter_value")
+                multi_class_value = st.selectbox("Select multi_class", ['auto','ovr','multinomial'])
+
+                if st.button("classify", key='classify'):
+                    st.subheader("Logistic Regression results")
+                    model = LogisticRegression(C=c_value, solver=solver_value, max_iter=max_iter_value, multi_class=multi_class_value)
+                    model.fit(X_train,y_train)
+                    accuracy = model.score(X_test,y_test)
+                    y_pred = model.predict(X_test)
+                    st.write("Accuracy: ", accuracy.round(2))
                     
+                    if len(target_names) > 2:
+                        st.write("Precision: ", precision_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                    else:
+                        st.write("Precision: ", precision_score(y_test,y_pred, labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, labels=target_names).round(2))
+                    
+                    '''
+                    class_report = classification_report(y_pred,y_test,output_dict=True)
+                    class_report_df = pd.DataFrame(class_report)
+
+                    if st.checkbox("Show classification report", False):
+                        st.dataframe(class_report_df)
+                    '''
+
         elif mining_problems_menu == 'Regression':
             regressors = ["-","Decision Tree","Support Vector Machine (SVM)","Logistic Regression","Random Forest"]
             regressor_menu = st.selectbox("Select a regression algorithm", (regressors))
