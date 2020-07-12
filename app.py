@@ -35,12 +35,8 @@ def main():
     data_frame = load_data()
     cleaned_df = pd.read_csv('res/cleaned_data.csv')
 
-    #Exploratory analysis section
-    st.header("2. Exploratory Analysis")
-    df_stats = DE.Exploration.show_basic_eda(data_frame)
-
     #Data cleaning section
-    st.header("3. Pre Process")
+    st.header("2. Pre Process")
     clean_missing_values = PP.PreProcess.replace_missing_values(data_frame)
     feature_encoding = PP.PreProcess.feature_encode(data_frame)
 
@@ -48,6 +44,10 @@ def main():
         clean_data = PP.PreProcess.clean_data(cleaned_df,clean_missing_values,feature_encoding)
         st.subheader("Pre Processed Data Frame")
         st.dataframe(clean_data)
+
+    #Exploratory analysis section
+    st.header("3. Exploratory Analysis")
+    df_stats = DE.Exploration.show_basic_eda(cleaned_df)
 
     #Feature selection section
     st.header("4. Feature Selection")
