@@ -32,9 +32,11 @@ class PreProcess:
             for cols in columns:
                 data_frame[cols].fillna(data_frame[cols].mean(), inplace=True)
         elif option == 'Median':
-            pass
+            for cols in columns:
+                data_frame[cols].fillna(data_frame[cols].median(), inplace=True)
         elif option == 'Mode':
-            pass
+            for cols in columns:
+                data_frame[cols].fillna(data_frame[cols].mode()[0], inplace=True)
 
         #Label encoding
         encode_col_selection = encode_columns
