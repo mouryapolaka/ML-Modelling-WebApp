@@ -47,7 +47,8 @@ def main():
 
     #Exploratory analysis section
     st.header("3. Exploratory Analysis")
-    df_stats = DE.Exploration.show_basic_eda(cleaned_df)
+    df_basic_eda = DE.Exploration.show_basic_eda(cleaned_df)
+    df_advanced_eda = DE.Exploration.show_advanced_eda(cleaned_df)
 
     #Feature selection section
     st.header("4. Feature Selection")

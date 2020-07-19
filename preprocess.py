@@ -9,7 +9,7 @@ class PreProcess:
 
         replace_options = ["-","Mean","Median","Mode"]
         st.subheader("Replace Missing Values")
-        columns = st.multiselect("Select columns", (data.columns))
+        columns = st.multiselect("Select columns:", (data.columns))
         option = st.selectbox("Replace with:", (replace_options))
 
         return option, columns
