@@ -23,7 +23,7 @@ $ source bin/active
 ```
 #### 3. Install the requirements
 ```bash
-$ pip install -r requirements.txt
+$ pip3 install -r requirements.txt
 ```
 #### 4. Run the application
 ```bash
