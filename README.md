@@ -1,5 +1,9 @@
 # ML-Modelling-WebApp
 
+## Contributors
+<table>
+  <td align="center"><a href="https://github.com/mouryapolaka"><img src="https://avatars.githubusercontent.com/u/1500684?v=3" width="100px;" alt=""/><br /><sub><b>Mourya Reddy Polaka</b></sub></a><br /></td>
+</table>
 ## 1. Requirements
 * Streamlit
 * Pandas
