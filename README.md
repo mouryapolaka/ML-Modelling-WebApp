@@ -6,6 +6,7 @@
   <td align="center"><a href="https://github.com/vivekVelivela"><img src="https://avatars.githubusercontent.com/vivekVelivela" width="100px;" alt=""/><br /><sub><b>Vivek Velivela</b></sub></a><br /></td>
   <td align="center"><a href="https://github.com/JKJIN1999"><img src="https://avatars.githubusercontent.com/JKJIN1999" width="100px;" alt=""/><br /><sub><b>Kim Jugyeong</b></sub></a><br /></td>
 </table>
+
 ## 1. Requirements
 * Streamlit
 * Pandas
