@@ -8,6 +8,7 @@ import pandas as pd
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 
 #import regressors from sklearn
 
@@ -140,6 +141,28 @@ class Train:
                     if st.checkbox("Show classification report", False):
                         st.dataframe(class_report_df)
                     '''
+
+            #Classification for Random Forest     
+            if classifier_menu == 'Random Forest':
+                st.subheader("Random Forest Parameters")
+                n_estimators = st.slider("N-estimators (Number of trees)",1,500, key="n_estimators")
+                max_depth = st.slider("Max depth of the tree",1,100, key="max_depth")
+                min_samples_split = st.slider("Minimum samples split",1,100, key="min_samples_split")
+
+                if st.button("classify", key='classify'):
+                    st.subheader("Random Forest results")
+                    model = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth, min_samples_split=min_samples_split)
+                    model.fit(X_train,y_train)
+                    accuracy = model.score(X_test,y_test)
+                    y_pred = model.predict(X_test)
+                    st.write("Accuracy: ", accuracy.round(2))
+                    
+                    if len(target_names) > 2:
+                        st.write("Precision: ", precision_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, average = 'weighted', labels=target_names).round(2))
+                    else:
+                        st.write("Precision: ", precision_score(y_test,y_pred, labels=target_names).round(2))
+                        st.write("Recall: ", recall_score(y_test,y_pred, labels=target_names).round(2))
 
         elif mining_problems_menu == 'Regression':
             regressors = ["-","Decision Tree","Support Vector Machine (SVM)","Logistic Regression","Random Forest"]
