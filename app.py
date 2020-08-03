@@ -14,6 +14,7 @@ def main():
     #Load dataset
     def load_data():
         #Prompt user to upload file
+        st.set_option('deprecation.showfileUploaderEncoding', False)
         uploaded_file = st.file_uploader("Choose a csv file...", type="csv")
 
         #If a file is not uploaded, return IRIS dataset

@@ -26,7 +26,7 @@ $ python3 -m venv <path of your ML-Modelling-Webapp directory>
 
 $ cd <path of your ML-Modelling-Webapp directory>
 
-$ source bin/active
+$ source bin/activate
 ```
 #### 3. Install the requirements
 ```bash
