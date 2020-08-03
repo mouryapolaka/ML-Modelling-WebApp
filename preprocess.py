@@ -9,7 +9,7 @@ class PreProcess:
 
         replace_options = ["-","Mean","Median","Mode"]
         st.subheader("Replace Missing Values")
-        columns = st.multiselect("Select columns", (data.columns))
+        columns = st.multiselect("Select columns:", (data.columns))
         option = st.selectbox("Replace with:", (replace_options))
 
         return option, columns
@@ -32,9 +32,11 @@ class PreProcess:
             for cols in columns:
                 data_frame[cols].fillna(data_frame[cols].mean(), inplace=True)
         elif option == 'Median':
-            pass
+            for cols in columns:
+                data_frame[cols].fillna(data_frame[cols].median(), inplace=True)
         elif option == 'Mode':
-            pass
+            for cols in columns:
+                data_frame[cols].fillna(data_frame[cols].mode()[0], inplace=True)
 
         #Label encoding
         encode_col_selection = encode_columns

@@ -14,6 +14,7 @@ def main():
     #Load dataset
     def load_data():
         #Prompt user to upload file
+        st.set_option('deprecation.showfileUploaderEncoding', False)
         uploaded_file = st.file_uploader("Choose a csv file...", type="csv")
 
         #If a file is not uploaded, return IRIS dataset
@@ -41,13 +42,14 @@ def main():
     feature_encoding = PP.PreProcess.feature_encode(data_frame)
 
     if st.button("Clean Data", key = 'clean_data'):
-        clean_data = PP.PreProcess.clean_data(cleaned_df,clean_missing_values,feature_encoding)
+        clean_data = PP.PreProcess.clean_data(data_frame,clean_missing_values,feature_encoding)
         st.subheader("Pre Processed Data Frame")
         st.dataframe(clean_data)
 
     #Exploratory analysis section
     st.header("3. Exploratory Analysis")
-    df_stats = DE.Exploration.show_basic_eda(cleaned_df)
+    df_basic_eda = DE.Exploration.show_basic_eda(cleaned_df)
+    df_advanced_eda = DE.Exploration.show_advanced_eda(cleaned_df)
 
     #Feature selection section
     st.header("4. Feature Selection")
