@@ -36,4 +36,3 @@ $ pip3 install -r requirements.txt
 ```bash
 $ streamlit run app.py
 ```
-## 3. Documentation
